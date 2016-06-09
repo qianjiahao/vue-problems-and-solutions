@@ -1,9 +1,8 @@
 <template>
   <div class="container">
     <div class="wrapper">
-      <div class="logo">
-
-      </div>
+      <div class="logo"></div>
+      
       <div class="content">
         <div class="bar">
           <input
@@ -13,19 +12,27 @@
             v-model="value"
             @keyup.enter="submit"
             @click="selectAll"
-            placeholder="空格分隔关键字"
+            @input="filter"
+            autocomplete="off"
           >
         </div>
-        <i class="iconfont icon-search search" @click="submit" ></i>
+        <i class="iconfont icon-search search" @click="submit"></i>
       </div>
-      <div class="auto" v-show="!!value">
-        sdfsdf
+      <div class="option" v-for="option in options" track-by="$index" v-show="!!value" transition="option">
+        {{option.title}}
+      </div>
+      <div class="tip">
+        <i>Tip: {{tip}}</i>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import pickTip from '../config/tips.js'
+import * as utils from '../utils/utils.js'
+import docs from '../config/doc.js'
+
 export default {
   ready () {
     let speed = 25
@@ -42,15 +49,26 @@ export default {
         }
       }
     })
+
+    this.tip = pickTip()
   },
   data () {
     return {
-      value: ''
+      value: '',
+      tip: '',
+      options: []
     }
   },
   methods: {
     selectAll (e) {
       e.target.select()
+    },
+    filter () {
+      this.options = []
+      const parts = utils.participle(this.value)
+      const weight = utils.countWeight(parts)
+      const sort = utils.sortByWeigth(weight, 5)
+      sort.map((index) => this.options.push(docs[index]))
     },
     submit () {
       console.log('submit')
@@ -74,7 +92,7 @@ export default {
 .logo {
   width: 100px;
   height: 100px;
-  margin: 20px auto 40px auto;
+  margin: 20px auto 20px auto;
 
   background-image: url(../images/logo.png);
   background-position: center;
@@ -122,15 +140,45 @@ export default {
   background-color: #5dc596;
 }
 
-.auto {
+.option {
   width: 100%;
   padding: 10px;
-  background-color: #eee;
   box-sizing: border-box;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border: 1px solid #ccc;
   border-top: 0;
+  position: relative;;
+  top: 0;
+  transition: 0.2s all;
+  background-color: white;
+  z-index: 10;
+
+  &:hover {
+    background-color: #5dc596;
+    color: white;
+    border: 1px solid #5dc596;
+    border-top: 0;
+  }
 }
+
+.option-leave, .option-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.highlight {
+  color: red;
+}
+
+.tip {
+  margin: 0px auto;
+  text-align: center;
+  color: #ccc;
+  position: absolute;
+  top: 200px;
+  z-index: 1;
+}
+
 @media screen and (min-width:960px) {
   .wrapper {
     width: 80%;

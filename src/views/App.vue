@@ -12,7 +12,6 @@ export default {}
 html, body, #app {
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
