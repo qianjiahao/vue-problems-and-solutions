@@ -1,68 +1,39 @@
 <template>
-  <div class="container">
-    <div class="wrapper">
-      <div class="logo"></div>
-      
-      <div class="content">
-        <div class="bar">
-          <input
-            class="input"
-            type="text"
-            name="name"
-            v-model="value"
-            @keyup.enter="submit"
-            @click="selectAll"
-            @input="filter"
-            autocomplete="off"
-          >
-        </div>
-        <i class="iconfont icon-search search" @click="submit"></i>
+  <div class="wrapper">
+    <div class="logo"></div>
+    <div class="content">
+      <div class="bar">
+        <input
+          class="input"
+          type="text"
+          name="name"
+          v-model="value"
+          @keyup.enter="submit"
+          @input="filter"
+          autocomplete="off"
+        >
       </div>
-      <div class="option" v-for="option in options" track-by="$index" v-show="!!value" transition="option">
-        {{option.title}}
-      </div>
-      <div class="tip">
-        <i>Tip: {{tip}}</i>
-      </div>
+      <i class="iconfont icon-search search" @click="submit"></i>
+    </div>
+    <div class="option" v-for="option in options" track-by="$index" v-show="!!value" transition="option">
+      {{option.title}}
     </div>
   </div>
 </template>
 
 <script>
-import pickTip from '../config/tips.js'
 import * as utils from '../utils/utils.js'
 import docs from '../config/doc.js'
 
 export default {
-  ready () {
-    let speed = 25
-
-    window.addEventListener('devicemotion', (e) => {
-      var acceleration = e.accelerationIncludingGravity
-      let x = acceleration.x
-      let y = acceleration.y
-      let lastX = 0
-      let lastY = 0
-      if (Math.abs(x - lastX) > speed || Math.abs(y - lastY) > speed) {
-        if (this.value && window.confirm('是否清空输入字符?')) {
-          this.value = ''
-        }
-      }
-    })
-
-    this.tip = pickTip()
-  },
+  props: ['show-nav'],
   data () {
     return {
       value: '',
-      tip: '',
       options: []
     }
   },
   methods: {
-    selectAll (e) {
-      e.target.select()
-    },
     filter () {
       this.options = []
       const parts = utils.participle(this.value)
@@ -71,18 +42,16 @@ export default {
       sort.map((index) => this.options.push(docs[index]))
     },
     submit () {
-      console.log('submit')
+      console.log(this.value)
+      if (this.value === '/nav') {
+        this.showNav = true
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.container {
-  width: 100%;
-  height: 100%;
-}
-
 .wrapper {
   width: 90%;
   margin: 0 auto;
@@ -92,7 +61,7 @@ export default {
 .logo {
   width: 100px;
   height: 100px;
-  margin: 20px auto 20px auto;
+  margin: 20px auto;
 
   background-image: url(../images/logo.png);
   background-position: center;
@@ -170,38 +139,16 @@ export default {
   color: red;
 }
 
-.tip {
-  margin: 0px auto;
-  text-align: center;
-  color: #ccc;
-  position: absolute;
-  top: 200px;
-  z-index: 1;
-}
-
 @media screen and (min-width:960px) {
   .wrapper {
     width: 80%;
   }
 }
 
-@media screen and (min-width:1024px) {
-  .wrapper {
-    width: 60%;
-  }
-
-  .input, .submit {
-    // font-size: 2.4rem;
-  }
-}
 
 @media screen and (min-width:1240px) {
   .wrapper {
     width: 50%;
-  }
-
-  .input, .submit {
-    // font-size: 2rem;
   }
 }
 </style>
