@@ -42,7 +42,6 @@ export default {
       sort.map((index) => this.options.push(docs[index]))
     },
     submit () {
-      console.log(this.value)
       if (this.value === '/nav') {
         this.showNav = true
       }
@@ -53,20 +52,8 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  width: 90%;
   margin: 0 auto;
   position: relative;;
-}
-
-.logo {
-  width: 100px;
-  height: 100px;
-  margin: 20px auto;
-
-  background-image: url(../images/logo.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .content {
@@ -135,20 +122,31 @@ export default {
   transform: translateY(10px);
 }
 
-.highlight {
-  color: red;
-}
-
 @media screen and (min-width:960px) {
   .wrapper {
-    width: 80%;
+    width: 100%;
+  }
+
+  .logo {
+    display: none;
   }
 }
 
-
-@media screen and (min-width:1240px) {
+@media screen and (min-width:1024px) {
   .wrapper {
-    width: 50%;
+    width: 60%;
   }
+
+.logo {
+  width: 100px;
+  height: 100px;
+  margin: 20px auto;
+  display: block;
+  background-image: url(../images/logo.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
+}
+
 </style>

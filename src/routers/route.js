@@ -8,17 +8,12 @@ const router = new VueRouter()
 router.map({
   '/': {
     component: (resolve) => {
-      require(['../views/Search.vue'], resolve)
+      require(['../views/Index.vue'], resolve)
     }
   },
-  '/search': {
+  '/index': {
     component: (resolve) => {
-      require(['../views/Search.vue'], resolve)
-    }
-  },
-  '/anwser': {
-    component: (resolve) => {
-      require(['../views/Answer.vue'], resolve)
+      require(['../views/Index.vue'], resolve)
     }
   },
   '/tag': {
