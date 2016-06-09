@@ -1,27 +1,16 @@
 <template>
   <div class="wrapper">
     <div class="logo"></div>
-    <div class="content">
-      <div class="bar">
-        <input
-          class="input"
-          type="text"
-          name="name"
-          v-model="value"
-          @keyup.enter="submit"
-          @input="filter"
-          autocomplete="off"
-        >
-      </div>
-      <i class="iconfont icon-search search" @click="submit"></i>
-    </div>
-    <div class="option" v-for="option in options" track-by="$index" v-show="!!value" transition="option">
-      {{option.title}}
-    </div>
+    <header class="header">
+      <search-bar :value.sync="value" :change="filter" :submit="submit"></search-bar>
+      <predictor :show="value" :data="predictor"></predictor>
+    </header>
   </div>
 </template>
 
 <script>
+import SearchBar from '../components/SearchBar.vue'
+import Predictor from '../components/Predictor.vue'
 import * as utils from '../utils/utils.js'
 import docs from '../config/doc.js'
 
@@ -30,22 +19,26 @@ export default {
   data () {
     return {
       value: '',
-      options: []
+      predictor: []
     }
   },
   methods: {
     filter () {
-      this.options = []
+      this.predictor = []
       const parts = utils.participle(this.value)
       const weight = utils.countWeight(parts)
       const sort = utils.sortByWeigth(weight, 5)
-      sort.map((index) => this.options.push(docs[index]))
+      sort.map((index) => this.predictor.push(docs[index]))
     },
     submit () {
       if (this.value === '/nav') {
         this.showNav = true
       }
     }
+  },
+  components: {
+    SearchBar,
+    Predictor
   }
 }
 </script>
@@ -53,100 +46,31 @@ export default {
 <style lang="scss" scoped>
 .wrapper {
   margin: 0 auto;
-  position: relative;;
-}
-
-.content {
-  width: 100%;
-  box-sizing: border-box;
-  position: relative;
-  border: 1px solid #ccc;
-
-  &:focus, &:hover {
-    border: 1px solid #5dc596;
-  }
-}
-
-.bar {
-  width: calc(100% - 30px);
   position: relative;
 }
 
-.input {
-  width: 100%;
-  font-size: 2rem;
-  border: none;
-  outline: none;
-  padding: 10px 50px 10px 10px;
+.header {
   position: relative;
-  box-sizing: border-box;
-  color: #666;
-}
-
-.search {
-  font-size: 3rem;
-  display: inline-block;
-  position: absolute;
-  padding: 4px 15px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
-  color: white;
-  cursor: pointer;
-  background-color: #5dc596;
-}
-
-.option {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  font-size: 1.5rem;
-  border: 1px solid #ccc;
-  border-top: 0;
-  position: relative;;
-  top: 0;
-  transition: 0.2s all;
-  background-color: white;
-  z-index: 10;
-
-  &:hover {
-    background-color: #5dc596;
-    color: white;
-    border: 1px solid #5dc596;
-    border-top: 0;
-  }
-}
-
-.option-leave, .option-enter {
-  opacity: 0;
-  transform: translateY(10px);
 }
 
 @media screen and (min-width:960px) {
-  .wrapper {
-    width: 100%;
-  }
-
-  .logo {
-    display: none;
-  }
+  .wrapper {width: 100%;}
+  .logo {display: none;}
 }
 
 @media screen and (min-width:1024px) {
-  .wrapper {
-    width: 60%;
-  }
+  .wrapper {width: 60%;}
 
-.logo {
-  width: 100px;
-  height: 100px;
-  margin: 20px auto;
-  display: block;
-  background-image: url(../images/logo.png);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
+  .logo {
+    width: 100px;
+    height: 100px;
+    margin: 20px auto;
+    display: block;
+    background-image: url(../images/logo.png);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
 }
 
 </style>
