@@ -7,6 +7,8 @@
       v-model="value"
       @keyup.enter="submit"
       @input="change"
+      @focus="focus"
+      @blur="blur"
       autocomplete="off">
     <i class="iconfont icon-search button" @click="submit"></i>
   </div>
@@ -14,7 +16,7 @@
 
 <script>
 export default {
-  props: ['value', 'submit', 'change']
+  props: ['value', 'submit', 'change', 'focus', 'blur']
 }
 </script>
 
@@ -25,13 +27,14 @@ export default {
   position: relative;
   border: 1px solid #ccc;
 
-  &:focus, &:hover {
+  &:active, &:hover {
     border: 1px solid #5dc596;
   }
 }
 
 .input {
   width: 100%;
+  height: 43px;
   font-size: 2rem;
   border: none;
   outline: none;
@@ -47,9 +50,9 @@ export default {
   display: inline-block;
   position: absolute;
   padding: 4px 15px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
+  right: -1px;
+  top: -1px;
+  bottom: -1px;
   color: white;
   cursor: pointer;
   background-color: #5dc596;

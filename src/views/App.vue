@@ -2,35 +2,28 @@
   <div id="app">
     <router-view :show-nav.sync="show"></router-view>
     <navigator :show-nav.sync="show"></navigator>
+    <assistant :click="toggleNav"></assistant>
   </div>
 </template>
 
 <script>
+import Assistant from '../components/Assistant.vue'
 import Navigator from '../components/Nav.vue'
 
 export default {
-  ready () {
-    window.addEventListener('devicemotion', (e) => {
-      let speed = 30
-      var acceleration = e.accelerationIncludingGravity
-      let x = acceleration.x
-      let y = acceleration.y
-      let lastX = 0
-      let lastY = 0
-      if (Math.abs(x - lastX) > speed || Math.abs(y - lastY) > speed) {
-        if (this.show === false) {
-          this.show = true
-        }
-      }
-    })
-  },
   data () {
     return {
       show: false
     }
   },
+  methods: {
+    toggleNav () {
+      this.show = !this.show
+    }
+  },
   components: {
-    Navigator
+    Navigator,
+    Assistant
   }
 }
 </script>

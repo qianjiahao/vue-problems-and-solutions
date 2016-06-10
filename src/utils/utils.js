@@ -24,7 +24,7 @@ export function countWeight (parts) {
     parts.map((p) => {
       let item = p.toLowerCase()
       // 计算标签权值
-      if (doc.tags[item]) {
+      if (doc.tags.indexOf(item) > -1) {
         result[index] += WEIGHT.tag
       }
 
@@ -50,16 +50,20 @@ export function countWeight (parts) {
 }
 
 // 根据权值排序，取前n个（降序排列）
-export function sortByWeigth (weight, n = 5) {
+export function sortByWeigth (weight, n = weight.length) {
   const result = []
   let i = weight.length > n ? n : weight.length
 
   while (i > 0) {
     let max = Math.max(...weight)
-    let index = weight.indexOf(max)
-    result.push(index)
-    weight.splice(index, 1, 0)
-    i--
+    if (max !== WEIGHT.init) {
+      let index = weight.indexOf(max)
+      result.push(doc[index])
+      weight.splice(index, 1, WEIGHT.init)
+      i--
+    } else {
+      break
+    }
   }
 
   return result
