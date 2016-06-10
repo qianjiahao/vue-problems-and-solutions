@@ -14,7 +14,6 @@ import SearchBar from '../components/SearchBar.vue'
 import Predictor from '../components/Predictor.vue'
 import DataTable from '../components/DataTable.vue'
 import * as utils from '../utils/utils.js'
-import router from '../routers/route.js'
 
 export default {
   props: ['show-nav'],
@@ -47,12 +46,8 @@ export default {
       this.predictor = sort
     },
     submit () {
-      if (this.value === '/dev') {
-        router.go({path: '/dev'})
-      } else {
-        this.result = this.predictor
-        this.predictorShow = false
-      }
+      this.result = this.predictor
+      this.predictorShow = false
     }
   },
   components: {
