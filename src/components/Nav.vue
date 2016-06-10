@@ -1,20 +1,11 @@
 <template>
   <div class="modal">
-    <div class="bg" transition="bg" v-show="showNav"></div>
+    <div class="bg" transition="bg" v-show="showNav" @click="showNav=false"></div>
     <div class="content" transition="content" v-show="showNav">
-      <div class="box" @click="link('/tag')">
-        tag
-      </div>
-      <div class="box" @click="link('/about')">
-        about me
-      </div>
-      <div class="box" @click="link('/')">
-        search
-      </div>
-      <div class="box" @click="link('/theme')">
-        theme
-      </div>
+      <div class="box iconfont icon-code" @click="link('/dev')"></div>
+      <div class="box iconfont icon-search" @click="link('/')"></div>
     </div>
+    <i :class="{'iconfont': true, 'icon-top': backToTop, 'back-to-top': true}" @click="back"></i>
   </div>
 </template>
 
@@ -22,11 +13,30 @@
 import router from '../routers/route.js'
 
 export default {
+  ready () {
+    window.jQuery(window).scroll(() => {
+      if (window.jQuery(window).scrollTop() > 100) {
+        this.backToTop = true
+      } else {
+        this.backToTop = false
+      }
+    })
+  },
   props: ['show-nav'],
+  data () {
+    return {
+      backToTop: false
+    }
+  },
   methods: {
     link (target) {
       router.go({path: target})
       this.showNav = false
+    },
+    back () {
+      window.jQuery('body,html').animate({
+        scrollTop: 0
+      }, 350)
     }
   }
 }
@@ -34,6 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .modal {
+  position: relative;
 
   .bg {
     position: fixed;
@@ -49,16 +60,14 @@ export default {
   .content {
     width: 200px;
     height: 130px;
-    position: absolute;
+    position: fixed;
     top: calc(50% - 60px);
     left: calc(50% - 100px);
     overflow: hidden;
-    background-color: white;
     z-index: 1000;
     box-sizing: border-box;
-    padding: 20px;
     transition: 0.2s all;
-
+    background-color: white;
   }
 }
 
@@ -73,10 +82,21 @@ export default {
 
 .box {
   width: 40%;
+  text-align: center;
+  font-size: 35px;
   box-sizing: border-box;
   float: left;
   margin: 5%;
   text-align: center;
-  background-color: #eee;
+}
+
+.back-to-top {
+  font-size: 30px;
+  position: fixed;
+  right: 0px;
+  bottom: 80px;
+  width: 32px;
+  z-index: 100;
+
 }
 </style>

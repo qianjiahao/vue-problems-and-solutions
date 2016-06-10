@@ -3,9 +3,9 @@
     <div class="logo"></div>
     <header class="header">
       <search-bar :value.sync="value" :change="filter" :submit="submit" :focus="focus" :blur="blur"></search-bar>
-      <predictor :show="predictorShow" :data="predictor.slice(0, 5)"></predictor>
+      <predictor :show="predictorShow" :data="predictor.slice(0, 5)" :click="choose"></predictor>
     </header>
-    <data-table :data="result"></data-table>
+    <data-table :data="result" :index="index"></data-table>
   </div>
 </template>
 
@@ -14,12 +14,14 @@ import SearchBar from '../components/SearchBar.vue'
 import Predictor from '../components/Predictor.vue'
 import DataTable from '../components/DataTable.vue'
 import * as utils from '../utils/utils.js'
+import router from '../routers/route.js'
 
 export default {
   props: ['show-nav'],
   data () {
     return {
       value: '',
+      index: -1,
       predictor: [],
       predictorShow: false,
       result: []
@@ -32,7 +34,12 @@ export default {
     blur () {
       this.predictorShow = false
     },
+    choose (item) {
+      this.predictorShow = false
+      this.result.push(item)
+    },
     filter () {
+      this.predictorShow = true
       this.predictor = []
       const parts = utils.participle(this.value)
       const weight = utils.countWeight(parts)
@@ -40,8 +47,8 @@ export default {
       this.predictor = sort
     },
     submit () {
-      if (this.value === '/nav') {
-        this.showNav = true
+      if (this.value === '/dev') {
+        router.go({path: '/dev'})
       } else {
         this.result = this.predictor
         this.predictorShow = false

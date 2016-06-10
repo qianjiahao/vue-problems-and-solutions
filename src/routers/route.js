@@ -30,6 +30,11 @@ router.map({
     component: (resolve) => {
       require(['../views/Theme.vue'], resolve)
     }
+  },
+  '/dev': {
+    component: (resolve) => {
+      require(['../views/Dev.vue'], resolve)
+    }
   }
 })
 

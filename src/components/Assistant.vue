@@ -11,12 +11,11 @@ export default {
 <style lange="scss" scoped>
 .assistant {
   position: fixed;
-  right: 10px;
-  bottom: 20px;
+  right: 0px;
+  bottom: 40px;
+  width: 35px;
   z-index: 998;
-  width: 40px;
-  height: 40px;
-  font-size: 40px;
+  font-size: 35px;
   color: #333;
 }
 </style>

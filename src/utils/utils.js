@@ -22,26 +22,30 @@ export function countWeight (parts) {
     result[index] = WEIGHT.init
 
     parts.map((p) => {
-      let item = p.toLowerCase()
-      // 计算标签权值
-      if (doc.tags.indexOf(item) > -1) {
-        result[index] += WEIGHT.tag
-      }
+      try {
+        let item = p.toLowerCase()
+        // 计算标签权值
+        if (doc.tags.indexOf(item) > -1) {
+          result[index] += WEIGHT.tag
+        }
 
-      let title = doc.title
-      let content = doc.content
-      let len = p.length
+        let title = doc.title
+        let content = doc.content
+        let len = p.length
 
-      // 计算标题权值
-      while (title.indexOf(p) > 0) {
-        title = title.slice(title.indexOf(p), title.indexOf(p) + len)
-        result[index] += WEIGHT.title
-      }
+        // 计算标题权值
+        while (title.indexOf(p) > -1) {
+          title = title.slice(0, title.indexOf(p)) + title.slice(title.indexOf(p) + len)
+          result[index] += WEIGHT.title
+        }
 
-      // 计算内容权值
-      while (content.indexOf(p) > 0) {
-        content = content.slice(content.indexOf(p), content.indexOf(p) + len)
-        result[index] += WEIGHT.content
+        // 计算内容权值
+        while (content.indexOf(p) > -1) {
+          content = content.slice(0, content.indexOf(p)) + content.slice(content.indexOf(p) + len)
+          result[index] += WEIGHT.content
+        }
+      } catch (e) {
+        console.log(e)
       }
     })
   })

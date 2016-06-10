@@ -6,6 +6,7 @@
       track-by="$index"
       v-show="!!show"
       transition="item"
+      @click="click(item)"
       v-text="item.title">
     </div>
   </div>
@@ -13,7 +14,7 @@
 
 <script>
 export default {
-  props: ['data', 'show']
+  props: ['data', 'show', 'click']
 }
 </script>
 
