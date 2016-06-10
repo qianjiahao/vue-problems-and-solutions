@@ -52,7 +52,7 @@ export default {
   computed: {
     result () {
       let title = this.title
-      let tags = this.checkedTag.length ? `tag.${this.checkedTag.join(', tag.')}` : ''
+      let tags = this.checkedTag.length ? `tag['${this.checkedTag.join('\'], tag[\'')}']` : ''
       let content = this.content.toString()
 
       const result = `{
@@ -153,7 +153,7 @@ export default {
 
 .doc-tag {
   float: left;
-  margin: 5px 10px;
+  margin: 5px;
   border: 1px solid #f49484;
   color: #f49484;
   padding: 5px;
@@ -201,7 +201,7 @@ export default {
     left: calc(50% - 35px);
     background-color: white;
     border-radius: 70px;
-    line-height: 1.7;
+    line-height: 1.5;
   }
 
   div {

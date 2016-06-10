@@ -4,6 +4,7 @@
     <div class="content" transition="content" v-show="showNav">
       <div class="box iconfont icon-code" @click="link('/dev')"></div>
       <div class="box iconfont icon-search" @click="link('/')"></div>
+      <!-- <div class="box iconfont icon-settings" @click="link('/settings')"></div> -->
     </div>
     <i :class="{'iconfont': true, 'icon-top': backToTop, 'back-to-top': true}" @click="back"></i>
   </div>
@@ -59,7 +60,6 @@ export default {
 
   .content {
     width: 200px;
-    height: 130px;
     position: fixed;
     top: calc(50% - 60px);
     left: calc(50% - 100px);
@@ -71,12 +71,15 @@ export default {
   }
 }
 
-.bg-leave, .bg-enter,
-.content-leave, .content-enter {
+.bg-leave,
+.bg-enter,
+.content-leave,
+.content-enter {
   opacity: 0;
 }
 
-.content-leave, .content-enter {
+.content-leave,
+.content-enter {
   transform: scale(1.1);
 }
 
@@ -93,7 +96,7 @@ export default {
 .back-to-top {
   font-size: 30px;
   position: fixed;
-  right: 0px;
+  right: 10px;
   bottom: 80px;
   width: 32px;
   z-index: 100;

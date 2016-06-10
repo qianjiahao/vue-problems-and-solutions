@@ -21,9 +21,14 @@ export function countWeight (parts) {
     // 基础权值
     result[index] = WEIGHT.init
 
-    parts.map((p) => {
+    parts.map((p, k) => {
       try {
-        let item = p.toLowerCase()
+        let item = typeof p === 'string' ? p.toLowerCase() : p.toString().toLowerCase()
+
+        // 计算优先级权值
+        let priority = parts.length - k
+        result[index] += priority
+
         // 计算标签权值
         if (doc.tags.indexOf(item) > -1) {
           result[index] += WEIGHT.tag

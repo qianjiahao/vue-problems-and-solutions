@@ -16,24 +16,14 @@ router.map({
       require(['../views/Index.vue'], resolve)
     }
   },
-  '/tag': {
-    component: (resolve) => {
-      require(['../views/Tag.vue'], resolve)
-    }
-  },
-  '/about': {
-    component: (resolve) => {
-      require(['../views/About.vue'], resolve)
-    }
-  },
-  '/theme': {
-    component: (resolve) => {
-      require(['../views/Theme.vue'], resolve)
-    }
-  },
   '/dev': {
     component: (resolve) => {
       require(['../views/Dev.vue'], resolve)
+    }
+  },
+  '/settings': {
+    component: (resolve) => {
+      require(['../views/Settings.vue'], resolve)
     }
   }
 })
