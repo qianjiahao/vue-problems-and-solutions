@@ -2,6 +2,7 @@ export default {
   'eslint': 'eslint',
   'this': 'this',
   'img': 'img',
+  '$index': '$index',
   'class': 'class',
   'style': 'style',
   'computed': 'computed',
@@ -26,5 +27,9 @@ export default {
   '组件实例': '组件实例',
   '热替换': '热替换',
   'hot reload': 'hot reload',
-  'webpack': 'webpack'
+  'webpack': 'webpack',
+  '箭头符号': '箭头符号',
+  '字面量': '字面量',
+  'v-cloak': 'v-cloak',
+  'sass': 'sass'
 }
