@@ -20,11 +20,6 @@ router.map({
     component: (resolve) => {
       require(['../views/Dev.vue'], resolve)
     }
-  },
-  '/settings': {
-    component: (resolve) => {
-      require(['../views/Settings.vue'], resolve)
-    }
   }
 })
 
