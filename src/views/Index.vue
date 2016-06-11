@@ -1,8 +1,8 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" @click.stop="hidePredictor">
     <div class="logo"></div>
     <header class="header">
-      <search-bar :value.sync="value" :change="filter" :submit="submit" :focus="focus" :blur="blur"></search-bar>
+      <search-bar :value.sync="value" :change="filter" :submit="submit" :focus="showPredictor" :click="showPredictor"></search-bar>
       <predictor :show="predictorShow" :data="predictor.slice(0, 5)" :click="choose"></predictor>
     </header>
     <data-table :data="result" :index="index"></data-table>
@@ -27,18 +27,18 @@ export default {
     }
   },
   methods: {
-    focus () {
+    showPredictor () {
       this.predictorShow = true
     },
-    blur () {
+    hidePredictor () {
       this.predictorShow = false
     },
     choose (item) {
-      this.predictorShow = false
-      this.result.push(item)
+      this.result = [item]
+      this.showPredictor()
     },
     filter () {
-      this.predictorShow = true
+      this.showPredictor()
       this.predictor = []
       const parts = utils.participle(this.value)
       const weight = utils.countWeight(parts)
@@ -47,7 +47,7 @@ export default {
     },
     submit () {
       this.result = this.predictor
-      this.predictorShow = false
+      this.hidePredictor()
     }
   },
   components: {

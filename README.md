@@ -1,5 +1,7 @@
 ##Vue Problems and Solutions
 
+[Demo](http://qianjiahao.github.io/vue-problems-and-solutions/#!/)
+
 欢迎大家贡献自己的problems和solutions
 
 ##贡献方法
