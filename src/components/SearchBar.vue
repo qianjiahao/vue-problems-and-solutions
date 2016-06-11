@@ -8,7 +8,7 @@
       @keyup.enter="submit"
       @input="change"
       @focus="focus"
-      @blur="blur"
+      @click.stop="click"
       autocomplete="off">
     <i class="iconfont icon-search button" @click="submit"></i>
   </div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  props: ['value', 'submit', 'change', 'focus', 'blur']
+  props: ['value', 'submit', 'change', 'focus', 'click']
 }
 </script>
 
@@ -49,7 +49,7 @@ export default {
   font-size: 3rem;
   display: inline-block;
   position: absolute;
-  padding: 4px 15px;
+  padding: 6px 15px;
   right: -1px;
   top: -1px;
   bottom: -1px;
