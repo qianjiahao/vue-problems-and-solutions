@@ -20,6 +20,11 @@ router.map({
     component: (resolve) => {
       require(['../views/Dev.vue'], resolve)
     }
+  },
+  '/detail/:id': {
+    component: (resolve) => {
+      require(['../views/Detail.vue'], resolve)
+    }
   }
 })
 

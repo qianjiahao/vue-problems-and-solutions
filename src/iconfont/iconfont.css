@@ -1,10 +1,10 @@
 
 @font-face {font-family: "iconfont";
-  src: url('iconfont.eot?t=1465562611'); /* IE9*/
-  src: url('iconfont.eot?t=1465562611#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('iconfont.woff?t=1465562611') format('woff'), /* chrome, firefox */
-  url('iconfont.ttf?t=1465562611') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-  url('iconfont.svg?t=1465562611#iconfont') format('svg'); /* iOS 4.1- */
+  src: url('iconfont.eot?t=1465651483'); /* IE9*/
+  src: url('iconfont.eot?t=1465651483#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('iconfont.woff?t=1465651483') format('woff'), /* chrome, firefox */
+  url('iconfont.ttf?t=1465651483') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+  url('iconfont.svg?t=1465651483#iconfont') format('svg'); /* iOS 4.1- */
 }
 
 .iconfont {
@@ -27,6 +27,8 @@
 .icon-more:before { content: "\e600"; }
 .icon-code:before { content: "\e611"; }
 .icon-marked:before { content: "\e605"; }
+.icon-404:before { content: "\e616"; }
+.icon-share:before { content: "\e615"; }
 .icon-unfold:before { content: "\e60f"; }
 .icon-fold:before { content: "\e610"; }
 .icon-copy-start:before { content: "\e60c"; }

@@ -5,6 +5,10 @@
     </div>
 
     <div class="wrapper">
+      <div class="doc-id">
+        ID:<span>{{id}}</span>
+      </div>
+
       标题
       <input class="doc-title" type="text" v-model="title">
 
@@ -36,10 +40,12 @@
 <script>
 import marked from 'marked'
 import tags from '../config/tag.js'
+import uuid from 'uuid'
 
 export default {
   data () {
     return {
+      id: uuid.v4(),
       title: '',
       tags: tags,
       checkedTag: [],
@@ -51,11 +57,13 @@ export default {
   },
   computed: {
     result () {
+      let id = this.id
       let title = this.title
       let tags = this.checkedTag.length ? `tag['${this.checkedTag.join('\'], tag[\'')}']` : ''
       let content = this.content.toString()
 
       const result = `{
+    id: '${id}',
     title: '${title}',
     tags: [${tags}],
     content: \`${content}\`
@@ -138,6 +146,15 @@ export default {
   font-size: 30px;
 }
 
+.doc-id {
+  @extend .line;
+  color: #666;
+
+  span {
+    color: #999;
+    margin-left: 10px;
+  }
+}
 .doc-title {
   @extend .line;
   padding: 10px;
