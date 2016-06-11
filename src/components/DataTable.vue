@@ -2,7 +2,7 @@
   <div class="data-table">
     <div class="tr" v-for="item in dataList" track-by="$index" v-show="dataList.length">
       <input class="hidden-id" type="text" :id="item.id" :value="shareUrl(item.id)">
-      <div class="title">{{item.title}}</div>
+      <a class="title" :href="shareUrl(item.id)"><i class="iconfont icon-link"></i>{{item.title}}</a>
       <div>
         <span class="tag" v-for="tag in item.tags">{{tag}}</span>
       </div>
@@ -94,8 +94,18 @@ table, tbody, tr {
 .title {
   width: calc(100% - 60px);
   margin-top: -10px;
+  margin-left: -5px;
   line-height: 2;
   font-size: 2rem;
+  color: #666;
+  text-decoration: none;
+
+  i {
+    transform: rotate(-15deg) translateY(-5px);
+    display: inline-block;
+    font-size: 1.7rem;
+    color: #f49484;
+  }
 }
 
 .tag {
@@ -128,7 +138,7 @@ table, tbody, tr {
 }
 
 .shared {
-  color: red;
+  color: #FF6A6A;
 }
 
 .hidden-id {
