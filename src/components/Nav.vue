@@ -4,7 +4,7 @@
     <div class="content" transition="content" v-show="showNav">
       <div class="box iconfont icon-code" @click="link('/dev')"></div>
       <div class="box iconfont icon-search" @click="link('/')"></div>
-      <!-- <div class="box iconfont icon-settings" @click="link('/settings')"></div> -->
+      <a class="box iconfont icon-github" href="https://github.com/qianjiahao/vue-problems-and-solutions" target="_blank"></a>
     </div>
     <i :class="{'iconfont': true, 'icon-top': backToTop, 'back-to-top': true}" @click="back"></i>
   </div>
@@ -91,12 +91,14 @@ export default {
   float: left;
   margin: 5%;
   text-align: center;
+  color: #222;
+  text-decoration: none;
 }
 
 .back-to-top {
   font-size: 30px;
   position: fixed;
-  right: 10px;
+  right: 20px;
   bottom: 80px;
   width: 32px;
   z-index: 100;

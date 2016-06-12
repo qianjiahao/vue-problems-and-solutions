@@ -2,6 +2,7 @@ import tag from './tag.js'
 
 export default [
   {
+    id: 'a013bff1-8912-406f-ae9c-0875a8529d17',
     title: 'eslint静态检查',
     tags: [tag['eslint']],
     content: `在大家用vue-cli创建工程的时候，会有一项，使用使用eslint，如果选择了y，那么工程就会安装并启用eslint。
@@ -35,6 +36,7 @@ export default [
   [6]: http://eslint.org/`
   },
   {
+    id: '77c55630-2fbb-11e6-ac64-b50848dab1ca',
     title: 'this指向',
     tags: [tag['this'], tag['箭头符号']],
     content: `经常会有朋友问一些undifined的错误，比如：
@@ -103,6 +105,7 @@ export default [
   [9]: https://segmentfault.com/img/bVvhHG`
   },
   {
+    id: '83ea9ec0-2fbb-11e6-9485-6f1a608fe2fc',
     title: '根据$index判断当前值',
     tags: [tag['$index']],
     content: `比如我们有一个列表，我们希望能显示我们当前选中的那一个，如何实现呢？
@@ -126,6 +129,7 @@ export default [
     },`
   },
   {
+    id: '8f67e780-2fbb-11e6-87d4-93f110a8c904',
     title: '传值与传字面量',
     tags: [tag['字面量']],
     content: `在vue的组件中传递数据，如果是单纯传递字面量，如
@@ -135,6 +139,7 @@ export default [
 那么在hello中获取的props result的值就是“success”，如果希望进行值传递，需要在指令前加 ':' 冒号，这样，父层的success的值改变，hello的值也会跟着改变。`
   },
   {
+    id: '9649af20-2fbb-11e6-8f62-b3fe7c319399',
     title: '转场动画transition',
     tags: [tag['transition']],
     content: `在vue中有个很好用的指令，transition，通过它我们可以实现自定义的router切换中的动画
@@ -146,6 +151,7 @@ export default [
 加入自定义的class fade-transition , fade-leave , fade-enter即可。`
   },
   {
+    id: 'b4bf6b31-4f86-4411-83c8-a72d590a5c71',
     title: 'v-cloak',
     tags: [tag['v-cloak']],
     content: `如果出现{{}}的短暂出现的情况，可以通过添加v-cloak来处理。
@@ -153,6 +159,7 @@ export default [
 这个指令保持在元素上直到关联实例结束编译。和 CSS 规则如 [v-cloak] { display: none } 一起用时，这个指令可以隐藏未编译的 Mustache 标签直到实例准备完毕。`
   },
   {
+    id: 'fbb9fe7a-0748-45c1-b9fe-fc8d05beaf72',
     title: '使用sass',
     tags: [tag['sass']],
     content: `首先安装依赖
@@ -166,6 +173,7 @@ export default [
 注意：是"scss"!然后重启webpack，就ok啦`
   },
   {
+    id: 'e6173714-348f-49e4-b749-4ad5c78a94bb',
     title: 'vue片段 fragment',
     tags: [tag['fragment'], tag['template']],
     content: `有时候我们会看到这个警告

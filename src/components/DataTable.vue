@@ -1,12 +1,21 @@
 <template>
   <div class="data-table">
     <div class="tr" v-for="item in dataList" track-by="$index" v-show="dataList.length">
-      <div class="title">{{item.title}}</div>
+      <input class="hidden-id" type="text" :id="item.id" :value="shareUrl(item.id)">
+      <a class="title" :href="shareUrl(item.id)" target="_blank"><i class="iconfont icon-link"></i>{{item.title}}</a>
       <div>
         <span class="tag" v-for="tag in item.tags">{{tag}}</span>
       </div>
-      <i :class="{'iconfont': true, 'fold': true, 'icon-fold': index !== $index, 'icon-unfold': index === $index}" @click="detail($index)"></i>
-      <div class="content" v-show="index === $index" v-html="item.content | marked | marked-img"></div>
+
+      <div class="operator">
+        <i :class="{'iconfont icon-share share': true, 'shared': item.id === shared}" @click="share(item.id)"></i>
+        <i :class="{'iconfont fold': true, 'icon-fold': !isOpen(item.id), 'icon-unfold unfolded': isOpen(item.id)}" @click="detail(item.id)"></i>
+      </div>
+      <div class="content" v-show="isOpen(item.id)">
+        {{{item.content | marked | marked-img}}}
+      </div>
+
+      <hr />
     </div>
     <div class="page" v-show="data.length">
       <div class="iconfont icon-pre pre" @click="pre" v-show="page > 0"></div>
@@ -19,24 +28,28 @@
 import marked from 'marked'
 
 export default {
-  props: ['data'],
+  props: ['data', 'detail', 'open-list'],
   data () {
     return {
-      index: -1,
       page: 0,
-      limit: 7
+      limit: 7,
+      shared: ''
     }
   },
   methods: {
-    detail ($index) {
-      if ($index === this.index) {
-        this.index = -1
-      } else {
-        this.index = $index
-      }
+    isOpen (id) {
+      return this.openList.indexOf(id) > -1
+    },
+    share (id) {
+      document.getElementById(id).select()
+      document.execCommand('Copy')
+      this.shared = id
+    },
+    shareUrl (id) {
+      let url = 'http://qianjiahao.github.io/vue-problems-and-solutions/#!/detail/'
+      return url + id
     },
     pre () {
-      this.index = -1
       this.page -= 1
     },
     next () {
@@ -48,7 +61,9 @@ export default {
   },
   computed: {
     dataList () {
-      return this.data.filter((v, k) => (this.page * this.limit) <= k && k < ((this.page + 1) * this.limit))
+      let min = this.page * this.limit
+      let max = (this.page + 1) * this.limit
+      return this.data.filter((v, k) => min <= k && k < max)
     }
   }
 }
@@ -61,28 +76,42 @@ table, tbody, tr {
 }
 
 .data-table {
-  margin: 0px auto;
+  margin: 10px auto;
   box-sizing: border-box;
   color: #666;
 }
 
 .tr {
   position: relative;
+  padding: 0 10px 10px 10px;
   box-sizing: border-box;
-  padding: 10px;
-  border-bottom: 1px solid #eee;
   transition: 0.2s all;
 
   &:hover, &:active {
-    border-bottom: 1px solid #bbb;
     color: #111;
+  }
+
+  hr {
+    border: 0;
+    border-bottom: 1px solid #eee;
   }
 }
 
 .title {
-  width: 100%;
+  width: calc(100% - 60px);
+  margin-top: -10px;
+  margin-left: -5px;
   line-height: 2;
-  font-size: 2rem;
+  font-size: 1.8rem;
+  color: #666;
+  text-decoration: none;
+
+  i {
+    transform: rotate(-15deg) translateY(-5px);
+    display: inline-block;
+    font-size: 1.5rem;
+    color: #f49484;
+  }
 }
 
 .tag {
@@ -95,21 +124,51 @@ table, tbody, tr {
   font-weight: 500;
 }
 
+.operator {
+  overflow: hidden;
+  clear: both;
+}
+
 .fold {
-  position: absolute;
-  left: calc(50% - 35px);
-  top: 46px;
-  font-size: 20px;
-  padding: 10px 30px;
+  float: right;
+  margin: 5px 10px;
+  font-size: 1.6rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.unfolded {
   color: #0078DB;
 }
 
+.share {
+  float: right;
+  margin: 5px 10px;
+  font-size: 1.6rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.shared {
+  color: #FF6A6A;
+}
+
+.hidden-id {
+  width: 0.1px;
+  height: 0.1px;
+  border: none;
+  outline: none;
+  opacity: 0.1;
+}
+
 .content {
-  margin: 10px -10px 10px -10px;
+  margin: 10px auto;
   border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 10px;
   overflow-x: auto;
+  position: relative;
+  z-index: 1;
 }
 
 .page {

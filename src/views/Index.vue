@@ -3,9 +3,9 @@
     <div class="logo"></div>
     <header class="header">
       <search-bar :value.sync="value" :change="filter" :submit="submit" :focus="showPredictor" :click="showPredictor"></search-bar>
-      <predictor :show="predictorShow" :data="predictor.slice(0, 5)" :click="choose"></predictor>
+      <predictor :show="predictorShow" :data="data.slice(0, 5)" :click="choose"></predictor>
     </header>
-    <data-table :data="result" :index="index"></data-table>
+    <data-table :data="result" :detail="detail" :open-list="openList"></data-table>
   </div>
 </template>
 
@@ -20,10 +20,10 @@ export default {
   data () {
     return {
       value: '',
-      index: -1,
-      predictor: [],
+      data: [],
       predictorShow: false,
-      result: []
+      result: [],
+      openList: []
     }
   },
   methods: {
@@ -37,16 +37,24 @@ export default {
       this.result = [item]
       this.showPredictor()
     },
+    detail (id) {
+      let index = this.openList.indexOf(id)
+      if (index > -1) {
+        this.openList.$remove(id)
+      } else {
+        this.openList.push(id)
+      }
+    },
     filter () {
       this.showPredictor()
-      this.predictor = []
+      this.data = []
       const parts = utils.participle(this.value)
       const weight = utils.countWeight(parts)
       const sort = utils.sortByWeigth(weight)
-      this.predictor = sort
+      this.data = sort
     },
     submit () {
-      this.result = this.predictor
+      this.result = this.data
       this.hidePredictor()
     }
   },
