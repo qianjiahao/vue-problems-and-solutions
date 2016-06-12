@@ -30,6 +30,11 @@ export default {
   'webpack': 'webpack',
   '箭头符号': '箭头符号',
   '字面量': '字面量',
+  '对象解构': '对象解构',
+  '模块化': '模块化',
   'v-cloak': 'v-cloak',
-  'sass': 'sass'
+  'sass': 'sass',
+  'less': 'less',
+  '模式': '模式',
+  '实践': '实践'
 }

@@ -6,6 +6,9 @@
       <predictor :show="predictorShow" :data="data.slice(0, 5)" :click="choose"></predictor>
     </header>
     <data-table :data="result" :detail="detail" :open-list="openList"></data-table>
+    <div class="footer">
+
+    </div>
   </div>
 </template>
 
@@ -74,6 +77,10 @@ export default {
 
 .header {
   position: relative;
+}
+
+.footer {
+  padding: 30px;
 }
 
 @media screen and (min-width:960px) {

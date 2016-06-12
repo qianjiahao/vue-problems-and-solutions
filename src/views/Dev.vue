@@ -169,7 +169,7 @@ export default {
 }
 
 .doc-tag {
-  float: left;
+  display: inline-block;
   margin: 5px;
   border: 1px solid #f49484;
   color: #f49484;
