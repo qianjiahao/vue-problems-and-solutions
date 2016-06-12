@@ -211,5 +211,44 @@ vue建议我们为片段添加一个根节点，这样方便传递props和过渡
     </template>
 
 [10]: https://segmentfault.com/img/bVxHyr`
+  },
+  {
+    id: '793a6027-8e0a-4280-80af-dc0b5c194049',
+    title: 'img 使用',
+    tags: [tag['img'], tag['webpack'], tag['class'], tag['style']],
+    content: `首先，如果使用的是img标签那么可以这样
+
+    data () {
+        return {
+            img: require('path/to/your/source')
+        }
+    }
+
+    然后在template中
+
+    <img :src="img" />
+
+如果使用的是背景图的方式，那么
+
+    可以这样
+
+    data () {
+        return {
+            img: require('path/to/your/source')
+        }
+    }
+
+    <div :style="{backgroundImage: 'url(' + img + ')'}"></div>
+
+    或者直接在css中定义
+
+    background-image: url('path/to/your/source');
+
+如果你的webpack配置了html-loader，那么久很方便了，只在img的src中写入相对路径
+
+    <img src="./images/logo.png" />
+
+轻松又愉快
+`
   }
 ]
