@@ -38,6 +38,7 @@ export default {
     },
     choose (item) {
       this.result = [item]
+      this.openList = [item.id]
       this.showPredictor()
     },
     detail (id) {
@@ -58,6 +59,7 @@ export default {
     },
     submit () {
       this.result = this.data
+      this.openList = []
       this.hidePredictor()
     }
   },
