@@ -244,11 +244,55 @@ vue建议我们为片段添加一个根节点，这样方便传递props和过渡
 
     background-image: url('path/to/your/source');
 
-如果你的webpack配置了html-loader，那么久很方便了，只在img的src中写入相对路径
+如果你的webpack配置了html-loader，那么就很方便了，只要在img的src中写入图片的相对路径
 
     <img src="./images/logo.png" />
 
-轻松又愉快
+轻松又愉快，因为html-loader会自动的帮我们做上述的打包路径的事
+`
+  },
+  {
+    id: '49be9a75-f141-495d-9a67-05ca63d239ff',
+    title: '单文件 单职责 原则',
+    tags: [tag['实践'], tag['模式'], tag['template'], tag['style'], tag['组件实例']],
+    content: `在使用vue编写应用时，我们应该遵循单文件单职责的原则，即以 .vue 结尾的文件中仅包含当前模块需要的
+
+- html （template）
+- css （style）
+- javascript （script）
+
+使用这种模式，script会自动的将当前文件的template加入到实例中。
+
+### script
+
+在script中，直接导出当前实例
+
+    export default {
+        // ...
+    }
+
+### template
+
+在template中，最外层的template会被自动的replace，所以，template的内层最好加一个dom元素做根节点，不会可能会报fragment（片段）的warning
+
+### style
+
+在style中，可以加上scoped（限定样式的作用域）属性
+
+    <style scoped>
+    // ...
+    </style>
+
+也可以使用其他css预编译，如sass
+
+    <style lang="scss" scoped>
+    // ...
+    </style>
+
+需要自行安装node-sass和sass-loader
+
+    npm i node-sass sass-loader -S
+
 `
   }
 ]
