@@ -1,5 +1,15 @@
 ##Vue Problems and Solutions
 
+[Demo](http://qianjiahao.github.io/vue-problems-and-solutions/#!/)
+
+更新日志
+
+2016-6-12
+
+    - 增加分享功能
+    - 优化了搜索框和数据展示样式
+
+
 欢迎大家贡献自己的problems和solutions
 
 ##贡献方法
