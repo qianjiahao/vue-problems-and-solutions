@@ -98,7 +98,7 @@ export default {
 .back-to-top {
   font-size: 30px;
   position: fixed;
-  right: 10px;
+  right: 20px;
   bottom: 80px;
   width: 32px;
   z-index: 100;

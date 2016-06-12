@@ -2,16 +2,20 @@
   <div class="data-table">
     <div class="tr" v-for="item in dataList" track-by="$index" v-show="dataList.length">
       <input class="hidden-id" type="text" :id="item.id" :value="shareUrl(item.id)">
-      <a class="title" :href="shareUrl(item.id)"><i class="iconfont icon-link"></i>{{item.title}}</a>
+      <a class="title" :href="shareUrl(item.id)" target="_blank"><i class="iconfont icon-link"></i>{{item.title}}</a>
       <div>
         <span class="tag" v-for="tag in item.tags">{{tag}}</span>
       </div>
-      <i :class="{'iconfont fold': true, 'icon-fold': !isOpen(item.id), 'icon-unfold': isOpen(item.id)}" @click="detail(item.id)"></i>
-      <i :class="{'iconfont icon-share share': true, 'shared': item.id === shared}" @click="share(item.id)"></i>
 
+      <div class="operator">
+        <i :class="{'iconfont icon-share share': true, 'shared': item.id === shared}" @click="share(item.id)"></i>
+        <i :class="{'iconfont fold': true, 'icon-fold': !isOpen(item.id), 'icon-unfold unfolded': isOpen(item.id)}" @click="detail(item.id)"></i>
+      </div>
       <div class="content" v-show="isOpen(item.id)">
         {{{item.content | marked | marked-img}}}
       </div>
+
+      <hr />
     </div>
     <div class="page" v-show="data.length">
       <div class="iconfont icon-pre pre" @click="pre" v-show="page > 0"></div>
@@ -72,22 +76,24 @@ table, tbody, tr {
 }
 
 .data-table {
-  margin: 0px auto;
+  margin: 10px auto;
   box-sizing: border-box;
   color: #666;
 }
 
 .tr {
   position: relative;
-  padding: 10px;
+  padding: 0 10px 10px 10px;
   box-sizing: border-box;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #eee;
   transition: 0.2s all;
 
   &:hover, &:active {
-    border-bottom: 1px solid #bbb;
     color: #111;
+  }
+
+  hr {
+    border: 0;
+    border-bottom: 1px solid #eee;
   }
 }
 
@@ -96,14 +102,14 @@ table, tbody, tr {
   margin-top: -10px;
   margin-left: -5px;
   line-height: 2;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #666;
   text-decoration: none;
 
   i {
     transform: rotate(-15deg) translateY(-5px);
     display: inline-block;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     color: #f49484;
   }
 }
@@ -118,21 +124,27 @@ table, tbody, tr {
   font-weight: 500;
 }
 
+.operator {
+  overflow: hidden;
+  clear: both;
+}
+
 .fold {
-  position: absolute;
-  left: calc(50% - 35px);
-  top: 46px;
-  font-size: 20px;
-  padding: 10px 30px;
+  float: right;
+  margin: 5px 10px;
+  font-size: 1.6rem;
+  color: #666;
+  cursor: pointer;
+}
+
+.unfolded {
   color: #0078DB;
 }
 
 .share {
-  font-size: 20px;
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  padding: 10px;
+  float: right;
+  margin: 5px 10px;
+  font-size: 1.6rem;
   color: #666;
   cursor: pointer;
 }
@@ -152,7 +164,7 @@ table, tbody, tr {
 .content {
   margin: 10px auto;
   border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 2px;
   padding: 10px;
   overflow-x: auto;
   position: relative;

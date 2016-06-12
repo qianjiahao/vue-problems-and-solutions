@@ -11,8 +11,8 @@ export default {
 <style lange="scss" scoped>
 .assistant {
   position: fixed;
-  right: 10px;
-  bottom: 40px;
+  right: 20px;
+  bottom: 30px;
   width: 35px;
   z-index: 998;
   font-size: 35px;
