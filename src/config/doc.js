@@ -294,5 +294,62 @@ vue建议我们为片段添加一个根节点，这样方便传递props和过渡
     npm i node-sass sass-loader -S
 
 `
+  },
+  {
+    id: 'a616390c-778a-4a23-80f7-cd05371fab76',
+    title: '模块化 import & export , module.exports & exports',
+    tags: [tag['模块化']],
+    content: `在经历过遵循AMD的RequireJS和遵循CMD的SeaJS后，2015、2016因webpack的大火，遵循commonjs的方式得到了普遍。
+
+### es5 多模块
+
+从同级的test.js文件中默认导出main函数，附带导出a1，a2函数
+
+    function a1 () {}
+    function a2 () {}
+    function main () {}
+
+    module.exports = main
+    module.exports.a1 = a1
+    module.exports.a2 = a2
+
+或者
+
+    module.exports = main
+    exports.a1 = a1
+    exports.a2 = a2
+
+引入的时候
+
+    var main = require('./test')
+
+    main()
+    main.a1()
+    main.a2()
+
+### es6 多模块
+
+从同级的test.js文件中默认导出main函数，附带导出a1，a2函数
+
+    export function a1 () {}
+    export function a2 () {}
+
+    export default function main () {}
+
+引入的时候
+
+    import main, { a1, a2 } from './test'
+
+    main()
+    a1()
+    a2()
+
+或者
+
+    import * as main from './test'
+
+    main()
+    main.a1()
+    main.a2()`
   }
 ]
