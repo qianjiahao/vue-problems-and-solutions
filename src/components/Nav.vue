@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import router from '../routers/route.js'
+import router from 'routers/route.js'
 
 export default {
   ready () {

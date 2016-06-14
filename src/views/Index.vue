@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import SearchBar from '../components/SearchBar.vue'
-import Predictor from '../components/Predictor.vue'
-import DataTable from '../components/DataTable.vue'
-import * as utils from '../utils/utils.js'
+import SearchBar from 'components/SearchBar.vue'
+import Predictor from 'components/Predictor.vue'
+import DataTable from 'components/DataTable.vue'
+import * as utils from 'utils/utils.js'
 
 export default {
   props: ['show-nav'],

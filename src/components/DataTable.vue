@@ -28,6 +28,20 @@
 <script>
 import marked from 'marked'
 
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  highlight: function (code) {
+    return window.hljs.highlightAuto(code).value
+  }
+})
+
 export default {
   props: ['data', 'detail', 'open-list'],
   data () {
