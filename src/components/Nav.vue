@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import router from '../routers/route.js'
+import router from 'routers/route.js'
 
 export default {
   ready () {
@@ -98,8 +98,9 @@ export default {
 .back-to-top {
   font-size: 30px;
   position: fixed;
-  right: 20px;
-  bottom: 80px;
+  padding: 0 10px;
+  right: 10px;
+  bottom: 60px;
   width: 32px;
   z-index: 100;
 

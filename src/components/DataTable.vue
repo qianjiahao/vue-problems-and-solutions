@@ -18,6 +18,7 @@
       <hr />
     </div>
     <div class="page" v-show="data.length">
+      <div class="num">{{page + 1}}</div>
       <div class="iconfont icon-pre pre" @click="pre" v-show="page > 0"></div>
       <div class="iconfont icon-next next" @click="next" v-show="(page + 1) * limit < data.length"></div>
     </div>
@@ -26,6 +27,20 @@
 
 <script>
 import marked from 'marked'
+
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  highlight: function (code) {
+    return window.hljs.highlightAuto(code).value
+  }
+})
 
 export default {
   props: ['data', 'detail', 'open-list'],
@@ -174,18 +189,34 @@ table, tbody, tr {
 .page {
   overflow: hidden;
   clear: both;
-  padding: 20px 30px;
+  padding: 0 60px;
+  position: relative;
+  margin-bottom: 20px;
 
-  .pre {
+  .buttom {
+    padding: 5px 20px;
     font-size: 30px;
-    float: left;
-    margin-left: 40px;
+    color: #333;
   }
 
+  .pre {
+    @extend .buttom;
+    float: left;
+  }
+
+  .num {
+    position: absolute;
+    width: 30px;
+    padding: 5px;
+    left: calc(50% - 15px);
+    top: calc(50% - 14px);
+    text-align: center;
+    font-size: 1.4rem;
+    border: 1px solid #eee;
+  }
   .next {
-    font-size: 30px;
+    @extend .buttom;
     float: right;
-    margin-right: 40px;
   }
 }
 </style>

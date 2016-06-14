@@ -7,8 +7,8 @@
 </template>
 
 <script>
-import Assistant from '../components/Assistant.vue'
-import Navigator from '../components/Nav.vue'
+import Assistant from 'components/Assistant.vue'
+import Navigator from 'components/Nav.vue'
 
 export default {
   data () {
@@ -37,5 +37,13 @@ html, body, #app {
   padding: 0;
   font-family: 'Source Sans Pro', 'Helvetica Neue', Arial, sans-serif;
   font-size: 10px;
+}
+
+pre code {
+  display: block;
+  background-color: #2d2d2d;
+  padding: 20px;
+  color: #cccccc;
+  overflow-x: auto;
 }
 </style>

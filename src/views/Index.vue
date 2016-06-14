@@ -6,14 +6,17 @@
       <predictor :show="predictorShow" :data="data.slice(0, 5)" :click="choose"></predictor>
     </header>
     <data-table :data="result" :detail="detail" :open-list="openList"></data-table>
+    <div class="footer">
+
+    </div>
   </div>
 </template>
 
 <script>
-import SearchBar from '../components/SearchBar.vue'
-import Predictor from '../components/Predictor.vue'
-import DataTable from '../components/DataTable.vue'
-import * as utils from '../utils/utils.js'
+import SearchBar from 'components/SearchBar.vue'
+import Predictor from 'components/Predictor.vue'
+import DataTable from 'components/DataTable.vue'
+import * as utils from 'utils/utils.js'
 
 export default {
   props: ['show-nav'],
@@ -35,6 +38,7 @@ export default {
     },
     choose (item) {
       this.result = [item]
+      this.openList = [item.id]
       this.showPredictor()
     },
     detail (id) {
@@ -55,6 +59,7 @@ export default {
     },
     submit () {
       this.result = this.data
+      this.openList = []
       this.hidePredictor()
     }
   },
@@ -74,6 +79,10 @@ export default {
 
 .header {
   position: relative;
+}
+
+.footer {
+  padding: 30px;
 }
 
 @media screen and (min-width:960px) {

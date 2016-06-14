@@ -42,6 +42,20 @@ import marked from 'marked'
 import tags from '../config/tag.js'
 import uuid from 'uuid'
 
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: false,
+  smartLists: true,
+  smartypants: false,
+  highlight: function (code) {
+    return window.hljs.highlightAuto(code).value
+  }
+})
+
 export default {
   data () {
     return {
@@ -169,7 +183,7 @@ export default {
 }
 
 .doc-tag {
-  float: left;
+  display: inline-block;
   margin: 5px;
   border: 1px solid #f49484;
   color: #f49484;
