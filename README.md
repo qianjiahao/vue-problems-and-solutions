@@ -3,6 +3,10 @@
 [Demo](http://qianjiahao.github.io/vue-problems-and-solutions/#!/)
 
 更新日志
+2016-6-15
+
+    - 加入scan看图模式
+    - 修复小bug
 
 2016-6-14
 
