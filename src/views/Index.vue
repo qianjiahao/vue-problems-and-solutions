@@ -1,14 +1,27 @@
 <template>
-  <div class="wrapper" @click.stop="hidePredictor">
+  <div class="wrapper">
     <div class="logo"></div>
     <header class="header">
-      <search-bar :value.sync="value" :change="filter" :submit="submit" :focus="showPredictor" :click="showPredictor"></search-bar>
-      <predictor :show="predictorShow" :data="data.slice(0, 5)" :click="choose"></predictor>
+      <search-bar
+        :value.sync="value"
+        :change="filter"
+        :submit="submit"
+        :focus="showPredictor"
+        :click="showPredictor"
+        :clear="clear">
+      </search-bar>
+      <predictor
+        :show="predictorShow"
+        :data="data.slice(0, 5)"
+        :click="choose">
+      </predictor>
     </header>
-    <data-table :data="result" :detail="detail" :open-list="openList"></data-table>
-    <div class="footer">
-
-    </div>
+    <data-table
+      :data="result"
+      :detail="detail"
+      :open-list="openList">
+    </data-table>
+    <div class="footer"></div>
   </div>
 </template>
 
@@ -36,10 +49,14 @@ export default {
     hidePredictor () {
       this.predictorShow = false
     },
+    clear () {
+      this.value = ''
+      this.hidePredictor()
+    },
     choose (item) {
       this.result = [item]
       this.openList = [item.id]
-      this.showPredictor()
+      this.hidePredictor()
     },
     detail (id) {
       let index = this.openList.indexOf(id)

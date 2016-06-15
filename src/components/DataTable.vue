@@ -22,6 +22,14 @@
       <div class="iconfont icon-pre pre" @click="pre" v-show="page > 0"></div>
       <div class="iconfont icon-next next" @click="next" v-show="(page + 1) * limit < data.length"></div>
     </div>
+    <div class="scan" v-show="scan.src" @click="scan.src = ''">
+      <img :src="scan.src" alt="" :style="{width: scan.size * 100 + '%'}"/>
+
+      <div class="alter">
+        <div class="box iconfont icon-small" @click.stop="alter(0.8)"></div>
+        <div class="box iconfont icon-big" @click.stop="alter(1.25)"></div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -38,17 +46,31 @@ marked.setOptions({
   smartLists: true,
   smartypants: false,
   highlight: function (code) {
-    return window.hljs.highlightAuto(code).value
+    if (window.hljs) {
+      return window.hljs.highlightAuto(code).value
+    } else {
+      return code
+    }
   }
 })
 
 export default {
   props: ['data', 'detail', 'open-list'],
+  ready () {
+    let _this = this
+    window.markedImg = function (img) {
+      _this.scan.src = img.src
+    }
+  },
   data () {
     return {
       page: 0,
       limit: 7,
-      shared: ''
+      shared: '',
+      scan: {
+        src: '',
+        size: 1
+      }
     }
   },
   methods: {
@@ -63,6 +85,9 @@ export default {
     shareUrl (id) {
       let url = 'http://qianjiahao.github.io/vue-problems-and-solutions/#!/detail/'
       return url + id
+    },
+    alter (size) {
+      this.scan.size *= size
     },
     pre () {
       this.page -= 1
@@ -217,6 +242,41 @@ table, tbody, tr {
   .next {
     @extend .buttom;
     float: right;
+  }
+}
+
+.scan {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1999;
+  background-color: rgba(0, 0, 0, 0.7);
+  overflow: auto;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+
+  .alter {
+    width: 200px;
+    position: fixed;
+    left: calc(50% - 100px);
+    bottom: 50px;
+    overflow: hidden;
+    background: white;
+
+    .box {
+      width: 50%;
+      border-left: 1px solid #eee;
+      box-sizing: border-box;
+      float: left;
+      text-align: center;
+      padding: 20px;
+      font-size: 24px;
+    }
   }
 }
 </style>
