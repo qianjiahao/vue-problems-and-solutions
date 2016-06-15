@@ -2,22 +2,20 @@
   <div class="wrapper">
     <div class="logo"></div>
     <header class="header">
-      <search-bar
+      <search
         :value.sync="value"
         :change="filter"
         :submit="submit"
-        :focus="showPredictor"
-        :click="showPredictor"
+        :focus="show"
+        :click="show"
         :clear="clear"
         :up="move.bind(this, -1)"
-        :down="move.bind(this, 1)">
-      </search-bar>
-      <predictor
+        :down="move.bind(this, 1)"
         :index="index"
-        :show="predictorShow"
+        :show="hint"
         :data="data.slice(0, 5)"
-        :click="choose">
-      </predictor>
+        :choose="choose">
+      </search>
     </header>
     <data-table
       :data="result"
@@ -29,8 +27,7 @@
 </template>
 
 <script>
-import SearchBar from 'components/SearchBar.vue'
-import Predictor from 'components/Predictor.vue'
+import Search from 'components/Search.vue'
 import DataTable from 'components/DataTable.vue'
 import * as utils from 'utils/utils.js'
 
@@ -40,27 +37,29 @@ export default {
     return {
       index: -1,
       value: '',
+      hint: false,
       data: [],
-      predictorShow: false,
       result: [],
       openList: []
     }
   },
   methods: {
-    showPredictor () {
-      this.predictorShow = true
+    show () {
+      this.index = -1
+      this.hint = true
     },
-    hidePredictor () {
-      this.predictorShow = false
+    hide () {
+      this.index = -1
+      this.hint = false
     },
     clear () {
       this.value = ''
-      this.hidePredictor()
+      this.hide()
     },
     choose (item) {
       this.result = [item]
       this.openList = [item.id]
-      this.hidePredictor()
+      this.hide()
     },
     move (flag) {
       if (flag < 0) {
@@ -78,7 +77,7 @@ export default {
       }
     },
     filter () {
-      this.showPredictor()
+      this.show()
       this.data = []
       const parts = utils.participle(this.value)
       const weight = utils.countWeight(parts)
@@ -86,18 +85,17 @@ export default {
       this.data = sort
     },
     submit () {
-      if (this.index > -1 || this.index < 5) {
+      if (this.index > -1 && this.index < 5) {
         this.choose(this.data[this.index])
       } else {
         this.result = this.data
       }
       this.openList = []
-      this.hidePredictor()
+      this.hide()
     }
   },
   components: {
-    SearchBar,
-    Predictor,
+    Search,
     DataTable
   }
 }
