@@ -87,10 +87,11 @@ export default {
     submit () {
       if (this.index > -1 && this.index < 5) {
         this.choose(this.data[this.index])
+        this.openList = [this.data[this.index].id]
       } else {
         this.result = this.data
+        this.openList = []
       }
-      this.openList = []
       this.hide()
     }
   },
