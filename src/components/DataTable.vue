@@ -267,6 +267,7 @@ table, tbody, tr {
     bottom: 50px;
     overflow: hidden;
     background: white;
+    box-shadow: 0 0 3px #666;
 
     .box {
       width: 50%;
