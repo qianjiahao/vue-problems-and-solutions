@@ -1,7 +1,7 @@
 <template>
   <div class="predictor">
     <div
-      class="item"
+      :class="{'item': true, 'item-active': index === $index}"
       v-for="item in data"
       track-by="$index"
       v-show="!!show"
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  props: ['data', 'show', 'click']
+  props: ['index', 'data', 'show', 'click']
 }
 </script>
 
@@ -43,6 +43,13 @@ export default {
     border: 1px solid #5dc596;
     border-top: 0;
   }
+}
+
+.item-active {
+  background-color: #5dc596;
+  color: white;
+  border: 1px solid #5dc596;
+  border-top: 0;
 }
 
 .item-leave, .item-enter {

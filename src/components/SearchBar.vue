@@ -9,6 +9,8 @@
       @input="change"
       @focus="focus"
       @click.stop="click"
+      @keydown.up="up"
+      @keydown.down="down"
       autocomplete="off">
     <i :class="{'iconfont icon-clear clear': true, 'clear-active': !!value.length}" @click="clear"></i>
     <i class="iconfont icon-search search" @click="submit"></i>
@@ -17,7 +19,7 @@
 
 <script>
 export default {
-  props: ['value', 'submit', 'change', 'focus', 'click', 'clear']
+  props: ['value', 'submit', 'change', 'focus', 'click', 'clear', 'up', 'down']
 }
 </script>
 

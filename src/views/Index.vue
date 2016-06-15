@@ -8,9 +8,12 @@
         :submit="submit"
         :focus="showPredictor"
         :click="showPredictor"
-        :clear="clear">
+        :clear="clear"
+        :up="move.bind(this, -1)"
+        :down="move.bind(this, 1)">
       </search-bar>
       <predictor
+        :index="index"
         :show="predictorShow"
         :data="data.slice(0, 5)"
         :click="choose">
@@ -35,6 +38,7 @@ export default {
   props: ['show-nav'],
   data () {
     return {
+      index: -1,
       value: '',
       data: [],
       predictorShow: false,
@@ -58,6 +62,13 @@ export default {
       this.openList = [item.id]
       this.hidePredictor()
     },
+    move (flag) {
+      if (flag < 0) {
+        this.index = this.index <= 0 ? -1 : --this.index
+      } else {
+        this.index = this.index >= 4 ? 5 : ++this.index
+      }
+    },
     detail (id) {
       let index = this.openList.indexOf(id)
       if (index > -1) {
@@ -75,7 +86,11 @@ export default {
       this.data = sort
     },
     submit () {
-      this.result = this.data
+      if (this.index > -1 || this.index < 5) {
+        this.choose(this.data[this.index])
+      } else {
+        this.result = this.data
+      }
       this.openList = []
       this.hidePredictor()
     }
