@@ -10,13 +10,14 @@
       @focus="focus"
       @click.stop="click"
       autocomplete="off">
-    <i class="iconfont icon-search button" @click="submit"></i>
+    <i :class="{'iconfont icon-clear clear': true, 'clear-active': !!value.length}" @click="clear"></i>
+    <i class="iconfont icon-search search" @click="submit"></i>
   </div>
 </template>
 
 <script>
 export default {
-  props: ['value', 'submit', 'change', 'focus', 'click']
+  props: ['value', 'submit', 'change', 'focus', 'click', 'clear']
 }
 </script>
 
@@ -45,7 +46,19 @@ export default {
   color: #666;
 }
 
-.button {
+.clear {
+  font-size: 2.6rem;
+  position: absolute;
+  right: 70px;
+  top: 8px;
+  color: #eee;
+}
+
+.clear-active {
+  color: #666;
+}
+
+.search {
   font-size: 3rem;
   display: inline-block;
   position: absolute;

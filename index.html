@@ -6,7 +6,8 @@
     <title>qa for Vue.js</title>
     <link rel="stylesheet" href="static/tomorrow-night-eighties.css">
     <script src="static/highlight.pack.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
+    <!-- 兼容开发环境 -->
+    <script>window['hljs'] ? hljs.initHighlightingOnLoad() : null</script>
   </head>
   <body>
     <div id="root"></div>

@@ -52,7 +52,11 @@ marked.setOptions({
   smartLists: true,
   smartypants: false,
   highlight: function (code) {
-    return window.hljs.highlightAuto(code).value
+    if (window.hljs) {
+      return window.hljs.highlightAuto(code).value
+    } else {
+      return code
+    }
   }
 })
 
